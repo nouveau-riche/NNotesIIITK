@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nnotesiiitk/screens/homePage.dart';
-import 'package:nnotesiiitk/screens/tabs_screen.dart';
+
+import '../utility/google_signin.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,6 +18,7 @@ class _LoginState extends State<Login> {
         children: [
           if (index == 0) buildPage1(),
           if (index == 1) buildPage2(),
+          if (index == 2) buildPage3(),
           buildDots(),
         ],
       ),
@@ -82,13 +83,32 @@ class _LoginState extends State<Login> {
 
   Widget buildPage3() {
     final mq = MediaQuery.of(context).size;
-
     return Column(
       children: [
-        Container(),
-        RaisedButton(
-          child: Text('GET STARTED'),
-          onPressed: () {},
+        Container(
+          height: mq.height * 0.6,
+          child: RaisedButton(
+            child: Text('GET STARTED'),
+            onPressed: () {
+              signInWithGoogle(context).whenComplete(() {
+                print('done successfully');
+              });
+            },
+          ),
+        ),
+        SizedBox(
+          height: mq.height * 0.1,
+        ),
+        Text(
+          'Having Notes at a good place can',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        ),
+        Text(
+          'save you from backlog.',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        ),
+        SizedBox(
+          height: mq.height * 0.1,
         ),
       ],
     );
@@ -132,7 +152,7 @@ class _LoginState extends State<Login> {
         SizedBox(
           width: mq.width * 0.15,
         ),
-        buildNextButton(),
+        if (index < 2) buildNextButton(),
       ],
     );
   }
@@ -153,10 +173,6 @@ class _LoginState extends State<Login> {
           setState(() {
             if (index < 2) {
               index++;
-            }
-            if (index == 2) {
-              Navigator.of(context)
-                  .pushReplacement(MaterialPageRoute(builder: (ctx) => TabsScreen()));
             }
           });
         },
