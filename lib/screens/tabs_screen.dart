@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import './accounts.dart';
-import './homePage.dart';
+import './home_screen.dart';
 import './add_notes.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -12,7 +12,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> screens = [
-    HomePage(),
+    HomeScreen(),
     AddNotes(),
     Account(),
   ];
@@ -40,7 +40,8 @@ class _TabsScreenState extends State<TabsScreen> {
               padding: EdgeInsets.all(0),
             ),
             icon: const FaIcon(
-              FontAwesomeIcons.school,
+              FontAwesomeIcons.columns,
+              size: 22,
             ),
           ),
           const BottomNavigationBarItem(
@@ -48,8 +49,8 @@ class _TabsScreenState extends State<TabsScreen> {
               padding: EdgeInsets.all(0),
             ),
             icon: const FaIcon(
-              FontAwesomeIcons.plusCircle,
-              color: Colors.lightBlue,
+              FontAwesomeIcons.plusSquare,
+              color: Color.fromRGBO(91, 242, 252, 1),
               size: 32,
             ),
           ),
@@ -59,6 +60,7 @@ class _TabsScreenState extends State<TabsScreen> {
             ),
             icon: const FaIcon(
               FontAwesomeIcons.user,
+              size: 20,
             ),
           )
         ],

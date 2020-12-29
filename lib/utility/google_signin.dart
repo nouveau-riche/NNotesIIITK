@@ -50,8 +50,8 @@ Future<String> signInWithGoogle(BuildContext context) async {
   imageUrl = user.photoURL;
 
   if (user.uid != null) {
-    saveUserInfoToFireStore(
-        uid: user.uid, name: name, imageURL: imageUrl, email: email);
+//    saveUserInfoToFireStore(
+//        uid: user.uid, name: name, imageURL: imageUrl, email: email);z
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (ctx) => TabsScreen()));
   }

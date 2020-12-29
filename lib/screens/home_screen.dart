@@ -1,11 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/gridItem.dart';
 import '../data/semester_subject.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
+
+  final User user = FirebaseAuth.instance.currentUser;
+
+
+
   @override
   Widget build(BuildContext context) {
+    final String name = user.displayName;
+    var name1 = name.split(' ');
+
     final mq = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -16,17 +25,16 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          'Hey nikunj,\nWelcome to IIITK',
+          'Hey ${name1[0]},\nWelcome to IIITK',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(right: 10),
             child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6), color: Colors.blue),
               width: 35,
               height: 48,
+              child: Image.network(user.photoURL),
             ),
           ),
         ],
