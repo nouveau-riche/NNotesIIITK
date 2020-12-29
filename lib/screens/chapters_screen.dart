@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChaptersScreen extends StatefulWidget {
   final String subject;
@@ -12,13 +14,13 @@ class ChaptersScreen extends StatefulWidget {
 class _ChaptersScreenState extends State<ChaptersScreen>
     with SingleTickerProviderStateMixin {
   TabController _controller;
-  int _selectedIndex = 0;
 
   List<Widget> list = [
     Tab(
-      icon: Icon(
-        Icons.note,
+      icon: FaIcon(
+        FontAwesomeIcons.stickyNote,
         color: Colors.black,
+        size: 20,
       ),
       child: Text(
         'Notes',
@@ -26,14 +28,22 @@ class _ChaptersScreenState extends State<ChaptersScreen>
       ),
     ),
     Tab(
-      icon: Icon(Icons.question_answer, color: Colors.black),
+      icon: FaIcon(
+        FontAwesomeIcons.paperclip,
+        color: Colors.black,
+        size: 20,
+      ),
       child: Text(
         'Paper',
         style: TextStyle(color: Colors.black),
       ),
     ),
     Tab(
-      icon: Icon(Icons.book, color: Colors.black),
+      icon: FaIcon(
+        FontAwesomeIcons.book,
+        color: Colors.black,
+        size: 20,
+      ),
       child: Text(
         'Books',
         style: TextStyle(color: Colors.black),
@@ -43,16 +53,8 @@ class _ChaptersScreenState extends State<ChaptersScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // Create TabController for getting the index of current tab
     _controller = TabController(length: 3, vsync: this);
-
-    _controller.addListener(() {
-      setState(() {
-        _selectedIndex = _controller.index;
-      });
-    });
   }
 
   @override
@@ -60,7 +62,6 @@ class _ChaptersScreenState extends State<ChaptersScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        centerTitle: true,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black54),
         title: Text(
@@ -68,7 +69,7 @@ class _ChaptersScreenState extends State<ChaptersScreen>
           style: TextStyle(color: Colors.black),
         ),
         bottom: TabBar(
-          //indicatorColor: C,
+          indicatorColor: Color.fromRGBO(91, 242, 252, 1),
           controller: _controller,
           tabs: list,
         ),
@@ -76,23 +77,77 @@ class _ChaptersScreenState extends State<ChaptersScreen>
       body: TabBarView(
         controller: _controller,
         children: [
-          Center(
-              child: Text(
-            _selectedIndex.toString(),
-            style: TextStyle(fontSize: 40),
-          )),
-          Center(
-              child: Text(
-            _selectedIndex.toString(),
-            style: TextStyle(fontSize: 40),
-          )),
-          Center(
-              child: Text(
-            _selectedIndex.toString(),
-            style: TextStyle(fontSize: 40),
-          )),
+          buildNotesTab(),
+          buildPaperTab(),
+          buildBooksTab(),
         ],
       ),
     );
+  }
+
+  Widget buildNotesTab() {
+    return Column(
+      children: [Text('notes')],
+    );
+  }
+
+  Widget buildPaperTab() {
+    return Column(
+      children: [Text('paper')],
+    );
+  }
+
+  Widget buildBooksTab() {
+    return Column(
+      children: [Text('books')],
+    );
+  }
+
+  Widget fetchPaper() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('papers')
+            .doc(widget.subject)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var _data = snapshot.data;
+            return Column();
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
+  }
+
+  Widget fetchNotes() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('notes')
+            .doc(widget.subject)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var _data = snapshot.data;
+            return Column();
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
+  }
+
+  Widget fetchBooks() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('books')
+            .doc(widget.subject)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var _data = snapshot.data;
+            return Column();
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
   }
 }

@@ -55,7 +55,7 @@ class SubjectItem extends StatelessWidget {
                     child: Text(
                       subjectName,
                       style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     )),
               ),
             ),
