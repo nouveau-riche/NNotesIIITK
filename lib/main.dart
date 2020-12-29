@@ -18,7 +18,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   final User user = FirebaseAuth.instance.currentUser;
 
   @override

@@ -82,7 +82,7 @@ class _WelcomeState extends State<Welcome> {
         Icon(
           Icons.brightness_1,
           color: Color.fromRGBO(91, 242, 252, 1),
-          size: 14,
+          size: 10,
         ),
         SizedBox(
           width: 4,
@@ -90,7 +90,7 @@ class _WelcomeState extends State<Welcome> {
         Icon(
           Icons.brightness_1,
           color: Color.fromRGBO(145, 224, 242, 1),
-          size: 14,
+          size: 10,
         ),
         SizedBox(
           width: 4,
@@ -98,7 +98,7 @@ class _WelcomeState extends State<Welcome> {
         Icon(
           Icons.brightness_1,
           color: Color.fromRGBO(145, 224, 242, 1),
-          size: 14,
+          size: 10,
         ),
       ],
     );

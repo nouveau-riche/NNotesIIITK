@@ -35,15 +35,15 @@ class _TabsScreenState extends State<TabsScreen> {
         selectedItemColor: Colors.black,
         elevation: 2,
         items: [
-          const BottomNavigationBarItem(
-            title: const Padding(
-              padding: EdgeInsets.all(0),
-            ),
-            icon: const FaIcon(
-              FontAwesomeIcons.columns,
-              size: 22,
-            ),
-          ),
+          BottomNavigationBarItem(
+              title: const Padding(
+                padding: EdgeInsets.all(0),
+              ),
+              icon: Container(
+                  height: 28,
+                  child: Image.asset(
+                    'assets/images/square.png',
+                  ))),
           const BottomNavigationBarItem(
             title: const Padding(
               padding: EdgeInsets.all(0),
