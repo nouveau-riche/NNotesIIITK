@@ -48,7 +48,7 @@ class _WelcomeState extends State<Welcome> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 50,
+                height: 42,
                 width: mq.width * 0.82,
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(

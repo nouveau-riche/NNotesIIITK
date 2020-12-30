@@ -19,13 +19,12 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final User user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: user != null ? TabsScreen() : Welcome(),
+      home: FirebaseAuth.instance.currentUser != null ? TabsScreen() : Welcome(),
     );
   }
 }

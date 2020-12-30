@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nnotesiiitk/screens/content_screen.dart';
-import 'package:nnotesiiitk/utility/slide_right_transition.dart';
+
+import '../screens/resources_screen.dart';
+import '../utility/slide_right_transition.dart';
 
 class SubjectItem extends StatelessWidget {
   final String subjectName;
@@ -15,8 +16,9 @@ class SubjectItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(SlideRightRoute(
-            page: ChaptersScreen(
+            page: ResourcesScreen(
           subject: subjectName,
+              color: color,
         )));
       },
       child: Card(

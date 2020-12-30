@@ -51,7 +51,7 @@ class Welcome2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 50,
+                height: 42,
                 width: mq.width * 0.82,
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(

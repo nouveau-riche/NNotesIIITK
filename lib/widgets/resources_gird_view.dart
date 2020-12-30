@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nnotesiiitk/widgets/content_grid_item.dart';
+
+import '../widgets/resources_grid_item.dart';
 
 class ContentGridView extends StatelessWidget {
-  final List<ContentGridItem> items;
+  final List<ResourceGridItem> items;
 
   ContentGridView({this.items});
 
@@ -14,7 +15,7 @@ class ContentGridView extends StatelessWidget {
           crossAxisCount: 3,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 3 / 2),
+          childAspectRatio: 1.2),
       itemBuilder: (ctx, index) {
         return items[index];
       },

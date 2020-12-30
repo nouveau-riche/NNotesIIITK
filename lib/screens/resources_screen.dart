@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../widgets/content_gird_view.dart';
-import '../widgets/content_grid_item.dart';
+import '../widgets/resources_gird_view.dart';
+import '../widgets/resources_grid_item.dart';
 
-class ChaptersScreen extends StatefulWidget {
+class ResourcesScreen extends StatefulWidget {
   final String subject;
+  final Color color;
 
-  ChaptersScreen({this.subject});
+  ResourcesScreen({this.subject, this.color});
 
   @override
-  _ChaptersScreenState createState() => _ChaptersScreenState();
+  _ResourcesScreenState createState() => _ResourcesScreenState();
 }
 
-class _ChaptersScreenState extends State<ChaptersScreen>
+class _ResourcesScreenState extends State<ResourcesScreen>
     with SingleTickerProviderStateMixin {
   TabController _controller;
 
@@ -72,7 +73,7 @@ class _ChaptersScreenState extends State<ChaptersScreen>
           style: TextStyle(color: Colors.black),
         ),
         bottom: TabBar(
-          indicatorColor: Color.fromRGBO(91, 242, 252, 1),
+          indicatorColor: widget.color,
           controller: _controller,
           tabs: list,
         ),
@@ -98,12 +99,13 @@ class _ChaptersScreenState extends State<ChaptersScreen>
           if (snapshot.hasData) {
             var _data = snapshot.data;
 
-            List<ContentGridItem> gridList = [];
+            List<ResourceGridItem> gridList = [];
 
             _data.data()['papers'].forEach((key, value) {
-              gridList.add(ContentGridItem(
+              gridList.add(ResourceGridItem(
                 name: key,
                 url: value,
+                color: widget.color,
               ));
             });
 
@@ -111,7 +113,7 @@ class _ChaptersScreenState extends State<ChaptersScreen>
               items: gridList,
             );
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         });
   }
