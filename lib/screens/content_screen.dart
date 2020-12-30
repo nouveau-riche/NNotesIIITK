@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../widgets/content_gird_view.dart';
+import '../widgets/content_grid_item.dart';
+
 class ChaptersScreen extends StatefulWidget {
   final String subject;
 
@@ -77,42 +80,36 @@ class _ChaptersScreenState extends State<ChaptersScreen>
       body: TabBarView(
         controller: _controller,
         children: [
-          buildNotesTab(),
-          buildPaperTab(),
-          buildBooksTab(),
+          fetchPaper(),
+          fetchPaper(),
+          fetchPaper(),
         ],
       ),
-    );
-  }
-
-  Widget buildNotesTab() {
-    return Column(
-      children: [Text('notes')],
-    );
-  }
-
-  Widget buildPaperTab() {
-    return Column(
-      children: [Text('paper')],
-    );
-  }
-
-  Widget buildBooksTab() {
-    return Column(
-      children: [Text('books')],
     );
   }
 
   Widget fetchPaper() {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('papers')
+            .collection('Papers')
             .doc(widget.subject)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var _data = snapshot.data;
-            return Column();
+
+            List<ContentGridItem> gridList = [];
+
+            _data.data()['papers'].forEach((key, value) {
+              gridList.add(ContentGridItem(
+                name: key,
+                url: value,
+              ));
+            });
+
+            return ContentGridView(
+              items: gridList,
+            );
           } else {
             return CircularProgressIndicator();
           }

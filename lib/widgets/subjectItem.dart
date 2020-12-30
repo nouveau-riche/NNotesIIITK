@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nnotesiiitk/screens/chapters_screen.dart';
+import 'package:nnotesiiitk/screens/content_screen.dart';
 import 'package:nnotesiiitk/utility/slide_right_transition.dart';
 
 class SubjectItem extends StatelessWidget {
